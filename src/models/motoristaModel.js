@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../configs/dbconfig.js";
+import conn from "../config/dbconfig.js";
 
-const Motoristas = sequelize.define("Motorista", {
+const Motoristas = conn.define("Motorista", {
     motorista_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

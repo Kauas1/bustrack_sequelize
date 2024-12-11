@@ -1,7 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../configs/dbconfig.js";
-import Linha from "./linhas.js";
-import Motorista from "./motoristas.js";
+import sequelize from "../config/dbconfig.js";
 
 const Onibus = sequelize.define("Onibus", {
     onibus_id: {
@@ -30,7 +28,7 @@ const Onibus = sequelize.define("Onibus", {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: Linha,
+            model: "linhas",
             key: "linha_id",
         },
     },
@@ -38,7 +36,7 @@ const Onibus = sequelize.define("Onibus", {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: Motorista,
+            model: "motoristas",
             key: "motorista_id",
         },
     },
@@ -46,9 +44,5 @@ const Onibus = sequelize.define("Onibus", {
     tableName: "onibus",
     timestamps: false,
 });
-
-
-Onibus.belongsTo(Linha, { foreignKey: "id_linha"});
-Onibus.belongsTo(Motorista, { foreignKey: "id_motorista"});
 
 export default Onibus;

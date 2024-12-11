@@ -58,8 +58,9 @@ export const listarLinhaId = async (req, res) => {
     }
 };
 
+
 export const editarLinha = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params; 
     const { nome_linha, numero_linha, itinerario } = req.body;
 
     if (!nome_linha && !numero_linha && !itinerario) {
@@ -83,11 +84,11 @@ export const editarLinha = async (req, res) => {
 
         if (numero_linha) {
             const linhaComNumero = await Linhas.findOne({
-                where: { numero_linha, id: { [Sequelize.Op.ne]: id } }
+                where: { numero_linha, linha_id: { [Sequelize.Op.ne]: id } } 
             });
 
             if (linhaComNumero) {
-                return res.status(404).json({ message: "Já existe uma linha com este número!" });
+                return res.status(400).json({ message: "Já existe uma linha com este número!" });
             }
         }
 
@@ -96,6 +97,6 @@ export const editarLinha = async (req, res) => {
         res.status(200).json({ message: `A Linha ${atualizacao.nome_linha} foi atualizada com sucesso!` });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Erro ao atualizar a linha!" });
+        res.status(500).json({ message: `Erro ao atualizar a linha: ${err.message}` }); // Detalha o erro
     }
 };

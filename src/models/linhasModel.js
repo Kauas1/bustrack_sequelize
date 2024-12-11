@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/dbconfig.js";
 
+
 const Linhas = sequelize.define("Linha", {
     linha_id: {
         type: DataTypes.INTEGER,
@@ -23,5 +24,7 @@ const Linhas = sequelize.define("Linha", {
     tableName: "linhas",
     timestamps: false,
 });
-    
+
+
+
 export default Linhas;
